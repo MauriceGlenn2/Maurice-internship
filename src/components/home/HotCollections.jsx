@@ -4,6 +4,7 @@ import axios from 'axios';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const HotCollections = () => {
   const [hotCollections, setHotCollections] = useState([])
@@ -16,36 +17,13 @@ const HotCollections = () => {
     }
     fetchHotCollections()
   }, [])
-  function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "red" }}
-        onClick={onClick}
-      />
-    );
+  
+  const next = () => {
+    sliderRef.current.slickNext();
   }
-  function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ 
-        color: "black !important", 
-        background: "white",
-        padding: "30px",
-        borderRadius: "50%", 
-        zIndex: "1",
-        alignItems: "center",
-        display: "flex",
-        justifyContent: "center",
-        border: "1px solid black",
-        right: "-50px",
-      }}
-        onClick={onClick}
-      />
-    );
+
+  const previous = () => {
+    sliderRef.current.slickPrev();
   }
 
   const settings = {
@@ -54,12 +32,9 @@ const HotCollections = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    arrows: false,
     rtl: true,
-    arrows: true,
+    arrows: false,
     swipe: false,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
     responsive: [
       {
         breakpoint: 1024,
@@ -95,7 +70,6 @@ const HotCollections = () => {
     ]
   };
 
-  //need to work on button styling and position
   return (
     <section id="section-collections" className="no-bottom">
       <div className="container">
@@ -106,6 +80,8 @@ const HotCollections = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
+          <div className="slider-container">
+            <button className="slider__button--left" onClick={previous}><FontAwesomeIcon icon="fa-solid fa-chevron-left" /></button>
           <Slider ref={sliderRef} {...settings}>
             {hotCollections.map((collections) => (
               <div key={collections.id} >
@@ -133,6 +109,8 @@ const HotCollections = () => {
               </div>
             ))}
           </Slider>
+            <button className="slider__button--right" onClick={next}><FontAwesomeIcon icon="fa-solid fa-chevron-right" /></button>
+          </div>
         </div>
       </div>
     </section>
