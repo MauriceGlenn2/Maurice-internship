@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const HotCollections = () => {
   const [hotCollections, setHotCollections] = useState([])
+  const [loading, setLoading] = useState(true)
   const sliderRef = useRef(); 
 
   useEffect(() => {
@@ -15,7 +16,12 @@ const HotCollections = () => {
       const { data } = await axios.get('https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections')
       setHotCollections(data)
     }
-    fetchHotCollections()
+    
+    setTimeout(() => {
+      fetchHotCollections()
+      setLoading(false)
+    }, 5000)
+    
   }, [])
   
   const next = () => {
@@ -83,7 +89,27 @@ const HotCollections = () => {
           <div className="slider-container">
             <button className="slider__button--left" onClick={previous}><FontAwesomeIcon icon="fa-solid fa-chevron-left" /></button>
           <Slider ref={sliderRef} {...settings}>
-            {hotCollections.map((collections) => (
+              {loading ? (
+             new Array(4).fill(0).map((_, index) => (
+                <div className=" col-lg-12 col-md-12 col-xs-12" key={index} >
+                  <div className="nft_coll">
+                    <div className="nft_wrap">
+                        <div className="img-fluid--loading"></div>
+                    </div>
+                    <div className="nft_coll_pp--loading">   
+                        <div className="pp-coll--loading"></div>
+                      <div className="pp-coll--loading--img"></div>
+                      <i className="fa fa-check loading__check--img"></i>
+                    </div>
+                    <div className="nft_coll_info--loading">
+                     <span className="loading__text--top"></span>
+                     <span className="loading__text"></span>
+                    </div>
+                  </div>
+                </div>
+              ))
+              ): (
+                hotCollections.map((collections) => (
               <div key={collections.id} >
                 <div className=" col-lg-12 col-md-12 col-xs-12" key={collections.id}>
                   <div className="nft_coll">
@@ -96,7 +122,7 @@ const HotCollections = () => {
                       <Link to="/author">
                         <img className="lazy pp-coll" src={collections.authorImage} alt="" />
                       </Link>
-                      <i className="fa fa-check"></i>
+                      <i className="fa fa-check loading__check"></i>
                     </div>
                     <div className="nft_coll_info">
                       <Link to="/explore">
@@ -107,7 +133,7 @@ const HotCollections = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            )))}
           </Slider>
             <button className="slider__button--right" onClick={next}><FontAwesomeIcon icon="fa-solid fa-chevron-right" /></button>
           </div>
