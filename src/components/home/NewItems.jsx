@@ -1,9 +1,77 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
+import axios from 'axios';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const NewItems = () => {
+  const [newItems, setNewItems] = useState([])
+  const sliderRef = useRef(); 
+
+  useEffect(() => {
+    async function fetchNewItems() {
+      const { data } = await axios.get('https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems')
+      setNewItems(data)
+      console.log(data)
+    }
+      fetchNewItems()
+  }, [])
+
+  const next = () => {
+    sliderRef.current.slickNext();
+  }
+
+  const previous = () => {
+    sliderRef.current.slickPrev();
+  }
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    rtl: true,
+    arrows: false,
+    swipe: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          variableWidth: false,
+
+        }
+      },
+      {
+        breakpoint: 990,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 765,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+
   return (
     <section id="section-items" className="no-bottom">
       <div className="container">
@@ -14,8 +82,11 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {new Array(4).fill(0).map((_, index) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
+          <div className="slider-container">
+            <button className="slider__button--left" onClick={previous}><FontAwesomeIcon icon="fa-solid fa-chevron-left" /></button>
+          <Slider ref={sliderRef} {...settings}>
+          {newItems.map((items) => (
+            <div className="col-lg-12 col-md-12 col-xs-12" key={items.id}>
               <div className="nft__item">
                 <div className="author_list_pp">
                   <Link
@@ -24,7 +95,7 @@ const NewItems = () => {
                     data-bs-placement="top"
                     title="Creator: Monica Lucas"
                   >
-                    <img className="lazy" src={AuthorImage} alt="" />
+                    <img className="lazy" src={items.authorImage} alt="" />
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
@@ -51,7 +122,7 @@ const NewItems = () => {
 
                   <Link to="/item-details">
                     <img
-                      src={nftImage}
+                      src={items.nftImage}
                       className="lazy nft__item_preview"
                       alt=""
                     />
@@ -59,17 +130,20 @@ const NewItems = () => {
                 </div>
                 <div className="nft__item_info">
                   <Link to="/item-details">
-                    <h4>Pinky Ocean</h4>
+                    <h4>{items.title}</h4>
                   </Link>
-                  <div className="nft__item_price">3.08 ETH</div>
+                  <div className="nft__item_price">{items.price} ETH</div>
                   <div className="nft__item_like">
                     <i className="fa fa-heart"></i>
-                    <span>69</span>
+                    <span>{items.likes}</span>
                   </div>
                 </div>
               </div>
             </div>
           ))}
+          </Slider>
+            <button className="slider__button--right" onClick={next}><FontAwesomeIcon icon="fa-solid fa-chevron-right" /></button>
+          </div>
         </div>
       </div>
     </section>
