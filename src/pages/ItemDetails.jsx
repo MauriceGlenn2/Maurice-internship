@@ -7,15 +7,29 @@ import axios from "axios";
 
 
 
-const ItemDetails = () => {
-
-
+const ItemDetails = (  ) => {
+  const { id } = useParams()
+  const [itemDetails, setItemDetails ] = useState(null)
+  const [loading, setLoading] = useState(true)
+ 
 
   useEffect(() => {
-   
+    async function getItemDetails() {
+      const { data } = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections");
+      const item = data.find(item => String(item.id) === String(id))
+      setItemDetails(item);
+      console.log(data)
+      setLoading(false)
+    }  
 
+    if(id){
+      getItemDetails(id)
+    }
+      
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
+  
+
 
   return (
     <div id="wrapper">
@@ -23,17 +37,21 @@ const ItemDetails = () => {
         <div id="top"></div>
         <section aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
-            <div className="row">
+            
+           {loading ? (<div>Loading...</div>) :
+           
+           itemDetails ? (<div className="row">
+              
               <div className="col-md-6 text-center">
                 <img
-                  src={nftImage}
+                    src={itemDetails.nftImage}
                   className="img-fluid img-rounded mb-sm-30 nft-image"
                   alt=""
                 />
               </div>
               <div className="col-md-6">
                 <div className="item_info">
-                  <h2>Rainbow #0001</h2>
+                    <h2>{itemDetails.title}</h2>
 
                   <div className="item_info_counts">
                     <div className="item_info_views">
@@ -56,7 +74,7 @@ const ItemDetails = () => {
                       <div className="item_author">
                         <div className="author_list_pp">
                           <Link to="/author">
-                            <img className="lazy" src={AuthorImage} alt="" />
+                              <img className="lazy" src={itemDetails.AuthorImage} alt="" />
                             <i className="fa fa-check"></i>
                           </Link>
                         </div>
@@ -85,13 +103,14 @@ const ItemDetails = () => {
                     <div className="spacer-40"></div>
                     <h6>Price</h6>
                     <div className="nft-item-price">
-                      <img src={EthImage} alt="" />
+                      <img src={itemDetails.EthImage} alt="" />
                       <span>1.85</span>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </div>) : (<div>no results</div>)
+            }
           </div>
         </section>
       </div>
