@@ -13668,7 +13668,7 @@ a.read_more i {
   align-items: center;
   justify-content: center;
   position: relative;
-  height: 350px;
+  height: 280px;
 }
 
 .nft__item_wrap a {
@@ -15223,6 +15223,65 @@ a.btn-slider:hover {
   padding: 2px;
   color: white;
   z-index: 1;
+}
+
+/* Loading Top Sellers */
+.top__sell--loading--wrapper{
+  display: flex;
+  justify-content: center;
+  
+}
+.top__sell--loading--price{
+  width: 28px;
+  height: 18px;
+   background: linear-gradient(
+    90deg,
+    lightgray 25%,
+    darkgray 50%,
+    lightgray 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 2s infinite;
+  margin-top: 4px;
+   margin-left: 18px;
+}
+
+.top__sell--text--loading{
+  margin-left: 4px;
+  margin-bottom: 20px;
+}
+
+.loading__auth--pp--wrapper{
+  margin-right: 38px;
+  padding: 0;
+}
+
+.top__sell--auth--loading{
+    width: 70px;
+    height: 18px;
+   background: linear-gradient(
+    90deg,
+    lightgray 25%,
+    darkgray 50%,
+    lightgray 75%
+  );
+   margin-top: 8px;
+   margin-left: 18px;
+}
+
+.top__sell--loading--img{
+  border-radius: 50%;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+
+  background: linear-gradient(
+    90deg,
+    lightgray 25%,
+    darkgray 50%,
+    lightgray 75%
+  );
+
 }
 
 @keyframes loading {

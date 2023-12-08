@@ -15,6 +15,7 @@ const HotCollections = () => {
     async function fetchHotCollections() {
       const { data } = await axios.get('https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections')
       setHotCollections(data)
+      console.log(data)
     }
     
     setTimeout(() => {
@@ -114,7 +115,7 @@ const HotCollections = () => {
                 <div className=" col-lg-12 col-md-12 col-xs-12" key={collections.id}>
                   <div className="nft_coll">
                     <div className="nft_wrap">
-                      <Link to="/item-details">
+                      <Link to={`/item-details/${collections.id}`}>
                         <img src={collections.nftImage} className="lazy img-fluid" alt="" />
                       </Link>
                     </div>

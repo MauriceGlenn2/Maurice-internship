@@ -18,7 +18,6 @@ const NewItems = () => {
     async function fetchNewItems() {
       const { data } = await axios.get('https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems')
       setNewItems(data)
-      console.log(data)
     }
     function calculateCountdown(item) {
       const currentTime = Date.now();
@@ -54,7 +53,7 @@ const NewItems = () => {
     setTimeout(() => {
       fetchNewItems()
       setLoading(false)
-    }, 5000)
+    }, 10000)
   }, [newItems])
 
   //Slider Settings
