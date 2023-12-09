@@ -15104,7 +15104,7 @@ a.btn-slider:hover {
     lightgray 25%,
     darkgray 50%,
     lightgray 75%
-  ); 
+  );
   background-size: 200% 100%;
   margin: 5px 0;
   animation: loading 2s infinite;
@@ -15144,7 +15144,7 @@ a.btn-slider:hover {
   background: var(--secondary-color);
   padding: 2px;
 }
-  
+
 .pp-coll--loading--img {
   width: 60px;
   height: 60px;
@@ -15160,8 +15160,8 @@ a.btn-slider:hover {
 }
 
 /* Loading New  */
-.nft__item_wrap--skeleton{
-   background: linear-gradient(
+.nft__item_wrap--skeleton {
+  background: linear-gradient(
     90deg,
     lightgray 25%,
     darkgray 50%,
@@ -15171,10 +15171,10 @@ a.btn-slider:hover {
   animation: loading 2s infinite;
 }
 
-.skeleton-box--title{
+.skeleton-box--title {
   width: 70%;
   height: 20px;
-    background: linear-gradient(
+  background: linear-gradient(
     90deg,
     lightgray 25%,
     darkgray 50%,
@@ -15185,10 +15185,10 @@ a.btn-slider:hover {
   margin: 10px 0px;
 }
 
-.skeleton-price{
-    width: 40%;
-    height: 20px;
-    background: linear-gradient(
+.skeleton-price {
+  width: 40%;
+  height: 20px;
+  background: linear-gradient(
     90deg,
     lightgray 25%,
     darkgray 50%,
@@ -15198,10 +15198,10 @@ a.btn-slider:hover {
   animation: loading 2s infinite;
   margin: 10px 0px;
 }
-.skeleton-heart{
-    width: 40px;
-    height: 20px;
-    background: linear-gradient(
+.skeleton-heart {
+  width: 40px;
+  height: 20px;
+  background: linear-gradient(
     90deg,
     lightgray 25%,
     darkgray 50%,
@@ -15212,7 +15212,7 @@ a.btn-slider:hover {
   margin: 10px 0px;
 }
 
-.loading__check--img--newI{
+.loading__check--img--newI {
   top: 60px;
   left: 50px;
   font-size: 12px;
@@ -15226,15 +15226,14 @@ a.btn-slider:hover {
 }
 
 /* Loading Top Sellers */
-.top__sell--loading--wrapper{
+.top__sell--loading--wrapper {
   display: flex;
   justify-content: center;
-  
 }
-.top__sell--loading--price{
+.top__sell--loading--price {
   width: 28px;
   height: 18px;
-   background: linear-gradient(
+  background: linear-gradient(
     90deg,
     lightgray 25%,
     darkgray 50%,
@@ -15243,45 +15242,56 @@ a.btn-slider:hover {
   background-size: 200% 100%;
   animation: loading 2s infinite;
   margin-top: 4px;
-   margin-left: 18px;
+  margin-left: 18px;
 }
 
-.top__sell--text--loading{
+.top__sell--text--loading {
   margin-left: 4px;
   margin-bottom: 20px;
 }
 
-.loading__auth--pp--wrapper{
+.loading__auth--pp--wrapper {
   margin-right: 38px;
   padding: 0;
 }
 
-.top__sell--auth--loading{
-    width: 70px;
-    height: 18px;
-   background: linear-gradient(
-    90deg,
-    lightgray 25%,
-    darkgray 50%,
-    lightgray 75%
-  );
-   margin-top: 8px;
-   margin-left: 18px;
-}
-
-.top__sell--loading--img{
-  border-radius: 50%;
-  padding: 10px;
-  width: 50px;
-  height: 50px;
-
+.top__sell--auth--loading {
+  width: 70px;
+  height: 18px;
   background: linear-gradient(
     90deg,
     lightgray 25%,
     darkgray 50%,
     lightgray 75%
   );
+  margin-top: 8px;
+  margin-left: 18px;
+}
 
+.top__sell--loading--img {
+  border-radius: 50%;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(
+    90deg,
+    lightgray 25%,
+    darkgray 50%,
+    lightgray 75%
+  );
+}
+
+.loading__explore--item {
+  width: 100%;
+  height: 400px !important;
+  animation: loading 2s infinite !important;
+  background-size: 200% 100% !important;
+  background: linear-gradient(
+    90deg,
+    lightgray 25%,
+    darkgray 50%,
+    lightgray 75%
+  );
 }
 
 @keyframes loading {

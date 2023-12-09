@@ -6,7 +6,6 @@ const TopSellers = () => {
   const [topSellers, setTopSellers] = useState([])
   const [loading, setLoading] = useState(true)
 
-
   useEffect(() => {
     async function fetchTopSellers() {
       const { data } = await axios.get(' https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers')
@@ -18,7 +17,6 @@ const TopSellers = () => {
     }, 5000)
 
   }, [])
-
 
   return (
     <section id="section-popular" className="pb-5">
@@ -34,37 +32,37 @@ const TopSellers = () => {
             <ol className="author_list">
               {loading ? (
                 new Array(12).fill(0).map((_, index) => (
-              <div className="top__sell--loading--wrapper" key={index}>
-                <span>{index + 1}.</span>
-                <div className="author_list_pp loading__auth--pp--wrapper">
-                  <div className="lazy pp-author top__sell--loading--img"></div>
-                  <i className="fa fa-check"></i>
-                </div>
-                <div className="author_list_info top__sell--text--loading ">
+                  <div className="top__sell--loading--wrapper" key={index}>
+                    <span>{index + 1}.</span>
+                    <div className="author_list_pp loading__auth--pp--wrapper">
+                      <div className="lazy pp-author top__sell--loading--img"></div>
+                      <i className="fa fa-check"></i>
+                    </div>
+                    <div className="author_list_info top__sell--text--loading ">
                       <span className="top__sell--auth--loading"></span>
-                  <span className="top__sell--loading--price"></span>
-                </div>
-              </div>
-              ))
+                      <span className="top__sell--loading--price"></span>
+                    </div>
+                  </div>
+                ))
               ) : (
-              topSellers.map((seller) => (
-              <li >
-                <div className="author_list_pp">
-                  <Link to={`/author/${seller.id}`}>
-                    <img
-                      className="lazy pp-author"
-                      src={seller.authorImage}
-                      alt=""
-                    />
-                    <i className="fa fa-check"></i>
-                  </Link>
-                </div>
-                <div className="author_list_info">
-                  <Link to={`/author/${seller.id}`}>{seller.authorName}</Link>
-                  <span>{seller.price} ETH</span>
-                </div>
-              </li>)
-              ))}
+                topSellers.map((seller, index) => (
+                  <li key={index}>
+                    <div className="author_list_pp" >
+                      <Link to={`/author/${seller.id}`}>
+                        <img
+                          className="lazy pp-author"
+                          src={seller.authorImage}
+                          alt=""
+                        />
+                        <i className="fa fa-check"></i>
+                      </Link>
+                    </div>
+                    <div className="author_list_info">
+                      <Link to={`/author/${seller.id}`}>{seller.authorName}</Link>
+                      <span>{seller.price} ETH</span>
+                    </div>
+                  </li>)
+                ))}
 
             </ol>
           </div>
