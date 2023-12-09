@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import calculateCountdown from '../utils/CalculateCountdown';
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([])
@@ -13,31 +13,10 @@ const NewItems = () => {
   const [loading, setLoading] = useState(true);
   const sliderRef = useRef();
 
-
   useEffect(() => {
     async function fetchNewItems() {
-      const { data } = await axios.get('https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems')
+      const { data } = await axios.get('https://us-central1-nft-cloud-functions.cloudfunctions.net/explore')
       setNewItems(data)
-    }
-    function calculateCountdown(item) {
-      const currentTime = Date.now();
-      const timeDifferenceMillisLeft = item.expiryDate - currentTime;
-
-      if (timeDifferenceMillisLeft <= 0) {
-        return "00h 00m 00s";
-      }
-      const seconds = Math.floor(timeDifferenceMillisLeft / 1000);
-      const minutes = Math.floor(seconds / 60);
-      const hours = Math.floor(minutes / 60);
-
-      const secondsText = seconds % 60;
-      const minutesText = minutes % 60;
-      const hoursText = hours % 24;
-
-      return `
-      ${hoursText.toString().padStart(2, "0")}h 
-      ${minutesText.toString().padStart(2, "0")}m 
-      ${secondsText.toString().padStart(2, "0")}s`;
     }
 
     if (newItems.length > 0) {
@@ -124,78 +103,78 @@ const NewItems = () => {
             <Slider ref={sliderRef} {...settings}>
               {loading ? (
                 new Array(4).fill(0).map((_, index) => (
-                <div className="col-lg-12 col-md-12 col-xs-12" key={index}>
-                  <div className="nft__item">
-                        <div className="skeleton-box-img"></div>
+                  <div className="col-lg-12 col-md-12 col-xs-12" key={index}>
+                    <div className="nft__item">
+                      <div className="skeleton-box-img"></div>
                       <i className="fa fa-check loading__check--img--newI"></i>
-                    <div className="nft__item_wrap nft__item_wrap--skeleton">
-                      <div className="nft__item_extra">
-                      </div>
-                    </div>
-                    <div className="nft__item_info">
-                    <div className="skeleton-box--title"></div>
-                      <div className=" nft__item_price skeleton-price"></div>
-                      <div className="nft__item_like skeleton-heart"></div>
-                    </div>
-                  </div>
-                </div>
-             ) )): ( 
-              newItems.map((items, index) => (
-                <div className="col-lg-12 col-md-12 col-xs-12" key={items.id}>
-                  <div className="nft__item">
-                    <div className="author_list_pp">
-                      <Link
-                        to="/author"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        title="Creator: Monica Lucas"
-                      >
-                        <img className="lazy" src={items.authorImage} alt="" />
-                        <i className="fa fa-check"></i>
-                      </Link>
-                    </div>
-                    <div className="de_countdown">{countDowns[index]}</div>
-                    <div className="nft__item_wrap">
-                      <div className="nft__item_extra">
-                        <div className="nft__item_buttons">
-                          <button>Buy Now</button>
-                          <div className="nft__item_share">
-                            <h4>Share</h4>
-                            <a href="" target="_blank" rel="noreferrer">
-                              <i className="fa fa-facebook fa-lg"></i>
-                            </a>
-                            <a href="" target="_blank" rel="noreferrer">
-                              <i className="fa fa-twitter fa-lg"></i>
-                            </a>
-                            <a href="">
-                              <i className="fa fa-envelope fa-lg"></i>
-                            </a>
-                          </div>
+                      <div className="nft__item_wrap nft__item_wrap--skeleton">
+                        <div className="nft__item_extra">
                         </div>
                       </div>
-
-                      <Link to="/item-details">
-                        <img
-                          src={items.nftImage}
-                          className="lazy nft__item_preview"
-                          alt=""
-                        />
-                      </Link>
-                    </div>
-                    <div className="nft__item_info">
-                      <Link to="/item-details">
-                        <h4>{items.title}</h4>
-                      </Link>
-                      <div className="nft__item_price">{items.price} ETH</div>
-                      <div className="nft__item_like">
-                        <i className="fa fa-heart"></i>
-                        <span>{items.likes}</span>
+                      <div className="nft__item_info">
+                        <div className="skeleton-box--title"></div>
+                        <div className=" nft__item_price skeleton-price"></div>
+                        <div className="nft__item_like skeleton-heart"></div>
                       </div>
                     </div>
                   </div>
-                </div>
-              )))
-              
+                ))) : (
+                newItems.map((items, index) => (
+                  <div className="col-lg-12 col-md-12 col-xs-12" key={items.id}>
+                    <div className="nft__item">
+                      <div className="author_list_pp">
+                        <Link
+                          to="/author"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="top"
+                          title="Creator: Monica Lucas"
+                        >
+                          <img className="lazy" src={items.authorImage} alt="" />
+                          <i className="fa fa-check"></i>
+                        </Link>
+                      </div>
+                      <div className="de_countdown">{countDowns[index]}</div>
+                      <div className="nft__item_wrap">
+                        <div className="nft__item_extra">
+                          <div className="nft__item_buttons">
+                            <button>Buy Now</button>
+                            <div className="nft__item_share">
+                              <h4>Share</h4>
+                              <a href="" target="_blank" rel="noreferrer">
+                                <i className="fa fa-facebook fa-lg"></i>
+                              </a>
+                              <a href="" target="_blank" rel="noreferrer">
+                                <i className="fa fa-twitter fa-lg"></i>
+                              </a>
+                              <a href="">
+                                <i className="fa fa-envelope fa-lg"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+
+                        <Link to="/item-details">
+                          <img
+                            src={items.nftImage}
+                            className="lazy nft__item_preview"
+                            alt=""
+                          />
+                        </Link>
+                      </div>
+                      <div className="nft__item_info">
+                        <Link to="/item-details">
+                          <h4>{items.title}</h4>
+                        </Link>
+                        <div className="nft__item_price">{items.price} ETH</div>
+                        <div className="nft__item_like">
+                          <i className="fa fa-heart"></i>
+                          <span>{items.likes}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )))
+
               }
             </Slider>
             <button className="slider__button--right" onClick={next}><FontAwesomeIcon icon="fa-solid fa-chevron-right" /></button>
