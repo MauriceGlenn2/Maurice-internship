@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import calculateCountdown from '../utils/CalculateCountdown';
 import FetchExploreData from "../utils/FetchExploreData";
 import FilterData from "../utils/FilterData";
+import AOS from "aos";
+import 'aos/dist/aos.css';
 
 const ExploreItems = () => {
+  AOS.init({ duration: 1000 });
   const [exploredItems, setExploredItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [countDowns, setCountDowns] = useState([]);
@@ -22,8 +25,7 @@ const ExploreItems = () => {
       setTimeout(() => {
         getFilteredItems();
         setLoading(false);
-      }, 3000);
-     
+      }, 2000);
     }
   }, [filter]);
 
@@ -40,13 +42,12 @@ const ExploreItems = () => {
         const newCountdowns = exploredItems.map((item) => calculateCountdown(item));
         setCountDowns(newCountdowns);
       }, 1000);
-
       return () => clearInterval(intervalId);
     }
     setTimeout(() => {
       getExploredItems()
       setLoading(false)
-    }, 5000)
+    }, 2000)
   }, [exploredItems]);
 
   function loadMoreNftsButton() {
@@ -66,7 +67,7 @@ const ExploreItems = () => {
       {loading ? (
         new Array(8).fill(0).map((_, index) => (
           <div key={index}
-            className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
+            className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12" data-aos="fade-up" 
             style={{ display: "block", backgroundSize: "cover" }}
           >
             <div className="nft__item loading__explore--item">
@@ -110,12 +111,12 @@ const ExploreItems = () => {
                     </div>
                   </div>
                 </div>
-                <Link to="/item-details">
+                <Link to={`/item-details/${explored.nftId}`}>
                   <img src={explored.nftImage} className="lazy nft__item_preview" alt="" />
                 </Link>
               </div>
               <div className="nft__item_info">
-                <Link to="/item-details">
+                <Link to={`/item-details/${explored.nftId}`}>
                   <h4>{explored.title}</h4>
                 </Link>
                 <div className="nft__item_price">{explored.price} ETH</div>

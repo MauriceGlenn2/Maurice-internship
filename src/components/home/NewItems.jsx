@@ -6,8 +6,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import calculateCountdown from '../utils/CalculateCountdown';
+import AOS from "aos";
+import 'aos/dist/aos.css';
 
 const NewItems = () => {
+  AOS.init({ duration: 1000 });
   const [newItems, setNewItems] = useState([])
   const [countDowns, setCountDowns] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +34,7 @@ const NewItems = () => {
     setTimeout(() => {
       fetchNewItems()
       setLoading(false)
-    }, 5000)
+    }, 2000)
   }, [newItems])
 
   //Slider Settings
@@ -88,7 +91,7 @@ const NewItems = () => {
   };
 
   return (
-    <section id="section-items" className="no-bottom">
+    <section id="section-items" className="no-bottom" data-aos-easing="ease-in" data-aos="fade-up">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
