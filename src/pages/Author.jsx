@@ -7,7 +7,6 @@ import FetchAuthorData from "../components/utils/FetchAuthorData";
 const Author = () => {
 const { authorId } = useParams()
 const [author, setAuthor] = useState([null])
-const [followers, setFollowers] = useState(0)
 const [isfollowing, setIsFollowing] = useState(false)
 
 useEffect(() => {
