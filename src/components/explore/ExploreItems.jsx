@@ -11,17 +11,19 @@ const ExploreItems = () => {
   const [displayCount, setDisplayCount] = useState(8);
   const [filter, setFilter] = useState("")
 
-  function loadMoreNftsButton() {
-    setDisplayCount(displayCount + 4);
-  }
-
   useEffect(() => {
     if (filter) {
+      setLoading(true);
       async function getFilteredItems() {
         const data = await FilterData(filter);
+        console.log(data);
         setExploredItems(data);
       }
-      getFilteredItems();
+      setTimeout(() => {
+        getFilteredItems();
+        setLoading(false);
+      }, 3000);
+     
     }
   }, [filter]);
 
@@ -46,6 +48,10 @@ const ExploreItems = () => {
       setLoading(false)
     }, 5000)
   }, [exploredItems]);
+
+  function loadMoreNftsButton() {
+    setDisplayCount(displayCount + 4);
+  }
 
   return (
     <>
@@ -76,7 +82,7 @@ const ExploreItems = () => {
             <div className="nft__item">
               <div className="author_list_pp">
                 <Link
-                  to="/author"
+                  to={`/author/${explored.authorId}`}
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
                 >

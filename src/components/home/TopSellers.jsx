@@ -10,12 +10,12 @@ const TopSellers = () => {
     async function fetchTopSellers() {
       const { data } = await axios.get(' https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers')
       setTopSellers(data)
+      console.log(data)
     }
     setTimeout(() => {
       fetchTopSellers()
       setLoading(false)
     }, 5000)
-
   }, [])
 
   return (
@@ -48,7 +48,7 @@ const TopSellers = () => {
                 topSellers.map((seller, index) => (
                   <li key={index}>
                     <div className="author_list_pp" >
-                      <Link to={`/author/${seller.id}`}>
+                      <Link to={`/author/${seller.authorId}`}>
                         <img
                           className="lazy pp-author"
                           src={seller.authorImage}
@@ -58,7 +58,7 @@ const TopSellers = () => {
                       </Link>
                     </div>
                     <div className="author_list_info">
-                      <Link to={`/author/${seller.id}`}>{seller.authorName}</Link>
+                      <Link to={`/author/${seller.authorId}`}>{seller.authorName}</Link>
                       <span>{seller.price} ETH</span>
                     </div>
                   </li>)
