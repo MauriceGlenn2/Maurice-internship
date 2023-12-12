@@ -18,7 +18,6 @@ const NewItems = () => {
       const { data } = await axios.get('https://us-central1-nft-cloud-functions.cloudfunctions.net/explore')
       setNewItems(data)
     }
-
     if (newItems.length > 0) {
       const newCountdowns = newItems.map((item) => calculateCountdown(item));
       setCountDowns(newCountdowns);
@@ -32,7 +31,7 @@ const NewItems = () => {
     setTimeout(() => {
       fetchNewItems()
       setLoading(false)
-    }, 10000)
+    }, 5000)
   }, [newItems])
 
   //Slider Settings
@@ -124,7 +123,7 @@ const NewItems = () => {
                     <div className="nft__item">
                       <div className="author_list_pp">
                         <Link
-                          to="/author"
+                          to={`/author/${items.authorId}`}
                           data-bs-toggle="tooltip"
                           data-bs-placement="top"
                           title="Creator: Monica Lucas"
