@@ -15357,6 +15357,47 @@ a.btn-slider:hover {
   );
 }
 
+.author__loading--img{
+  width: 180px !important; 
+  height: 180px !important;
+  border-radius: 50% !important;
+ 
+  background-size: 200% 100%  !important;
+  background: linear-gradient(
+    90deg,
+    lightgray 25%,
+    darkgray 50%,
+    lightgray 75%
+ ); /* Use a linear gradient with two colors */
+  object-fit: cover;
+  animation: loading 2s infinite;
+  display: inline-block  !important;
+}
+
+.author__loading--info--wrapper{
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.author__loading--info{
+   width: 180px !important; 
+  height: 20px !important;
+  margin: 10px 0px;
+  background-size: 200% 100%  !important;
+  background: linear-gradient(
+    90deg,
+    lightgray 25%,
+    darkgray 50%,
+    lightgray 75%
+ ); /* Use a linear gradient with two colors */
+  object-fit: cover;
+  animation: loading 2s infinite;
+  display: inline-block !important;
+  
+}
+
 @keyframes loading {
   0% {
     background-position: 0% 50%;

@@ -9,7 +9,7 @@ const [loading, setLoading] = useState(true)
     }
     setTimeout(() => {
       setLoading(false)
-    }, 5000);   
+    }, 3000);   
   }, [nftCollection]);
 
   if (!nftCollection) {
