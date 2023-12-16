@@ -25,7 +25,7 @@ const ExploreItems = () => {
       setTimeout(() => {
         getFilteredItems();
         setLoading(false);
-      }, 2000);
+      }, 3000);
     }
   }, [filter]);
 
@@ -39,6 +39,7 @@ const ExploreItems = () => {
       setCountDowns(newCountdowns);
 
       const intervalId = setInterval(() => {
+        
         const newCountdowns = exploredItems.map((item) => calculateCountdown(item));
         setCountDowns(newCountdowns);
       }, 1000);
@@ -128,11 +129,15 @@ const ExploreItems = () => {
             </div>
           </div>)
         ))}
-      <div className="col-md-12 text-center">
+      {displayCount === 16 ?  (<di></di>)
+      :
+      (<div className="col-md-12 text-center">
         <Link onClick={loadMoreNftsButton} to="" id="loadmore" className="btn-main lead">
           Load more
         </Link>
-      </div>
+      </div>)
+       
+      }
     </>
   );
 };

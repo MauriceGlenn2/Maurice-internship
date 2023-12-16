@@ -18,7 +18,7 @@ const TopSellers = () => {
     setTimeout(() => {
       fetchTopSellers()
       setLoading(false)
-    }, 5000)
+    }, 3000)
   }, [])
 
   return (

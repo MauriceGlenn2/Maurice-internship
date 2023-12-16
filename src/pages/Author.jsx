@@ -8,13 +8,19 @@ const Author = () => {
 const { authorId } = useParams()
 const [author, setAuthor] = useState([null])
 const [isfollowing, setIsFollowing] = useState(false)
+const [loading, setLoading] = useState(true)
 
 useEffect(() => {
 async function getAuthor() {
+  setLoading(true)
   const data = await FetchAuthorData(authorId)
   setAuthor(data)
 }
-getAuthor()
+
+setTimeout(() => {
+  getAuthor()
+  setLoading(false)
+}, 2000)
 }, [])
 
 function handleFollowers() {
@@ -43,7 +49,19 @@ function handleFollowers() {
               <div className="col-md-12">
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
-                    <div className="profile_avatar">
+                    {loading ?
+                    
+                    (<div className="profile_avatar">
+                      <div className="author__loading--img"></div>
+                        <div className="profile_name author__loading--info--wrapper">
+                          <span className="author__loading--info"></span>
+                          <span className="author__loading--info"></span>
+                          <span className="author__loading--info"></span>
+                      </div>
+                    </div>)
+                 
+                 :
+                 ( <div className="profile_avatar">
                       <img src={author.authorImage} alt="" />
                       <i className="fa fa-check"></i>
                       <div className="profile_name">
@@ -58,7 +76,7 @@ function handleFollowers() {
                           </button>
                         </h4>
                       </div>
-                    </div>
+                    </div>)}
                   </div>
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">

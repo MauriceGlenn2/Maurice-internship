@@ -3,7 +3,7 @@ export default function calculateCountdown(item) {
   const timeDifferenceMillisLeft = item.expiryDate - currentTime;
 
   if (timeDifferenceMillisLeft <= 0) {
-    return "00h 00m 00s";
+    return "Expired";
   }
   const seconds = Math.floor(timeDifferenceMillisLeft / 1000);
   const minutes = Math.floor(seconds / 60);

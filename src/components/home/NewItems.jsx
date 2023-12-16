@@ -34,7 +34,7 @@ const NewItems = () => {
     setTimeout(() => {
       fetchNewItems()
       setLoading(false)
-    }, 2000)
+    }, 3000)
   }, [newItems])
 
   //Slider Settings
